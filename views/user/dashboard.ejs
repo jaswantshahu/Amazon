@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-12">
+        <h3>Top Products</h3>
+        <div class="row">
+            <% for(let i = 0; i < products.length; i++){
+                let product = products[i];
+                let allImages = product.images.split(',');
+            %>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="/single-product/<%= product.id; %>">
+                            <h4><%= product.title.toUpperCase(); %></h4>
+                        </a>
+                    </div>
+                    <div class="card-body text-center" style="height: 300px;">
+                        <img src="/image/product/<%= allImages[0]; %>" style="height: 100%;" />
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-6">
+                                <span>Price :<span class="product-price"><%=product.price;%>/-</span></span>
+                            </div>
+                            <div class="col-6">
+                                <a href="/add-to-cart?productId=<%= product.id; %>" class="btn btn-info">Add To Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>

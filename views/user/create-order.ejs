@@ -1,0 +1,145 @@
+<div class="container-fluid">
+    <form action="/create-order" method="post">
+        <div class="row">
+            <div class="col-8">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Customer Details
+                            </div>
+                            <div class="card-body">
+                                <div class="col">
+                                    <label>Full Name</label>
+                                    <input type="text" name="fullName" class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label>Email</label>
+                                    <input type="email" name="email" class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label>Contact</label>
+                                    <input type="number" name="contact" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Shipping Address
+                            </div>
+                            <div class="card-body">
+                                <div class="col">
+                                    <label>Address</label>
+                                    <textarea name="shippingAddress" id="" class="form-control"></textarea>
+                                </div>
+                                <div class="col">
+                                    <label>Pincode</label>
+                                    <input type="number" name="shippingPincode" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Billing Address
+                            </div>
+                            <div class="card-body">
+                                <div class="col">
+                                    <label>Address</label>
+                                    <textarea name="billingAddress" id="" class="form-control"></textarea>
+                                </div>
+                                <div class="col">
+                                    <label>Pincode</label>
+                                    <input type="number" name="billingPincode" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="col">
+                    <table class="table">
+                        <tr>
+                            <td>S.No</td>
+                            <td>Title</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>Total</td>
+                        </tr>
+                        <% let grandTotal=0; for(let i=0; i < items.length; i++ ){ let product=items[i];
+                            grandTotal=grandTotal + product.price; %>
+                            <tr>
+                                <td>
+                                    <%= i + 1; %>
+                                </td>
+                                <td>
+                                    <%= product.title; %>
+                                        <input type="hidden" name="productId" value="<%= product.id; %>" />
+                                        <input type="hidden" name="quantity" value="1" />
+                                        <input type="hidden" name="price" value="<%= product.price; %>" />
+                                </td>
+                                <td>
+                                    <%= product.price; %>
+                                </td>
+                                <td>1</td>
+                                <td>
+                                    <%= product.price * 1; %>
+                                </td>
+                            </tr>
+                            <% } %>
+                                <tr>
+                                    <td colspan="4">Grand Total</td>
+                                    <td>
+                                        <%= grandTotal; %>
+                                            <input type="hidden" name="grandTotal" value="<%= grandTotal; %>" />
+                                    </td>
+                                </tr>
+                    </table>
+                </div>
+                <div class="col">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Payment Method
+                            </div>
+                            <div class="card-body">
+                                <div class="col">
+                                    <span>
+                                        <input type="radio" name="paymentMethod" value="cod" /> COD
+                                    </span><br />
+                                    <span>
+                                        <input type="radio" name="paymentMethod" value="upi" /> UPI
+                                    </span><br />
+                                    <span>
+                                        <input type="radio" name="paymentMethod" value="net banking" /> Net Banking
+                                    </span><br />
+                                    <span>
+                                        <input type="radio" name="paymentMethod" value="wallet" /> Wallet
+                                    </span><br />
+                                    <span>
+                                        <input type="radio" name="paymentMethod" value="google pay" /> Google Pay
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <input type="submit" value="Place Order" class="btn btn-outline-primary btn-lg" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

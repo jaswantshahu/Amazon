@@ -1,0 +1,125 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>SHOP :: Orders</h2><br />
+        </div>
+        <div class="col-12">
+            <table class="table table-borderd table-hover table-info">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>#Order No</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Total Amount</th>
+                        <th>Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(orders) { for(let i=0; i < orders.length; i++) { let singleOrder=orders[i]; let
+                        items=JSON.parse(singleOrder.product_items); %>
+                        <tr>
+                            <td>
+                                <%= i+1; %>
+                            </td>
+                            <td>
+                                <%= singleOrder.id; %>
+                            </td>
+                            <td>
+                                <%= singleOrder.full_name; %>
+                            </td>
+                            <td>
+                                <%= singleOrder.email; %>
+                            </td>
+                            <td>
+                                <%= singleOrder.grandTotal; %>/-
+                            </td>
+                            <td>
+                                <!-- data-bs-toggle="modal" data-bs-target="#productInfoModal" -->
+                                <button class="btn btn-info"
+                                    onclick="getProductInfo(`<%= singleOrder.product_items; %>`);">Product
+                                    Info</button>
+                            </td>
+                        </tr>
+                        <% } %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5">No Orders Found</td>
+                                </tr>
+                                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Start :: Product Info Modal -->
+<div class="modal fade" id="productInfoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-info table-stripped">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productInfoContent"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End :: Product Info Modal -->
+
+<script>
+    function getProductInfo(items) {
+
+        let allItems = JSON.parse(items);
+        console.log("allItems", allItems);
+        let productIds = [];
+        allItems.forEach(function(singleItem) {
+            productIds.push(singleItem.productId);
+        });
+        console.log("productIds", productIds);
+        $.ajax({
+            url: '/getProductInfo',
+            method: 'get',
+            data: { prodIds: productIds },
+            success: function (result) {
+                console.log("result", result);
+                let products = result.items;
+                let tableBody = "";
+                products.forEach(function (singleItem, index) {
+                    console.log("singleItem", singleItem);
+                    let images = singleItem.images.split(',');
+                    tableBody = tableBody + `
+                        <tr>
+                            <td>${index + 1}</td>    
+                            <td>
+                                <img src="/image/product/${images[0]}" height="100" width="100" />
+                            </td>    
+                            <td>${singleItem.title}</td>    
+                        </tr>
+                    `;
+                });
+                //productInfoContent
+                $('#productInfoContent').html(tableBody);
+                $('#productInfoModal').modal('show');
+            },
+            error: function (error) {
+
+            }
+        });
+    }
+</script>

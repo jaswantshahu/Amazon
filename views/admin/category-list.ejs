@@ -1,0 +1,34 @@
+<div class="row mt-5">
+
+    <div class="container-fluid">
+        <h2>All Category </h2>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>S.NO</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <% for(i = 0; i < categories.length; i++){ let cat = categories[i]; %> 
+                    <tr>
+                        <td><%= i + 1; %></td>
+                        <td><%= cat.title; %></td>
+                        <td>
+                            <img src="/image/category/<%= cat.image; %>" style="height: 100px; width: 150px;" />
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-info">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+
+        </table>
+    </div>
+</div>

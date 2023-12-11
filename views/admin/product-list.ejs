@@ -1,0 +1,48 @@
+<div class="row mt-5">
+    <div class="col-md-12">
+
+        <h2>All Products </h2>
+        <hr>
+        <table class="table table-bordered">
+            <tr>
+                <th>S.NO</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+            <% for(let i=0; i<products.length; i++){ let product=products[i]; let images=product.images.split(','); %>
+                <tr>
+                    <td>
+                        <%= i + 1; %>
+                    </td>
+                    <td>
+                        <img src="/image/product/<%= images[0]; %>" style="height: 100px;width: 120px;" />
+                    </td>
+                    <td>
+                        <%= product.title; %>
+                    </td>
+                    <td>
+                        <%= product.description; %>
+                    </td>
+                    <td>
+                        <%= product.price; %>
+                    </td>
+                    <td>
+                        <%= product.quantity; %>
+                    </td>
+                    <td>
+                        <%= product.cat_title; %>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-primary">Edit</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+</div>

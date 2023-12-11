@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<style>
+    input {
+        border-radius: 20px;
+        padding-bottom: 5px;
+        background-color: skyblue;
+        font-weight: bold;
+    }
+
+    td {
+        padding-top: 30px;
+        font-weight: bolder;
+    }
+
+    textarea {
+        border-radius: 20px;
+        padding-bottom: 5px;
+        background-color: skyblue;
+    }
+</style>
+
+<body>
+    <div style="width: 100%;">
+        <div style="width: 30%;display: inline-block;"></div>
+        <div style="width: 40%; background-color: rgb(18, 199, 11); display: inline-block;border: 4px dotted darkblue;">
+            <form action="/register" method="post">
+                <h2 align="center"> Registration Form </h2>
+                <table align="center">
+                    <tr>
+                        <td>
+                            <label>First Name:</label>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="First Name" name="firstName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Last Name:</label>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Last Name" name="lastName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Phone No:</label>
+                        </td>
+                        <td>
+                            <input type="number" name="contact" placeholder="Phone No">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Email Id:</label>
+                        </td>
+                        <td>
+                            <input type="email" name="email" placeholder="Email id">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Password:</label>
+                        </td>
+                        <td>
+                            <input type="Password" name="password" placeholder="Password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Confirm Password:</label>
+                        </td>
+                        <td>
+                            <input type="Password" name="confirmPassword" placeholder="Confirm Password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Gender:</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="gender" value="male"> Male
+                            <input type="radio" name="gender" value="female"> Female
+                            <input type="radio" name="gender" value="other"> Other
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Address:</label>
+                        </td>
+                        <td>
+                            <textarea name="Address" placeholder="Address" class="form-control"></textarea>
+                        </td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="2">
+                            <input type="submit" name="Submit">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div style="width: 30%;"></div>
+    </div>
+</body>
+
+</html>

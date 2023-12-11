@@ -1,0 +1,83 @@
+<div class="row mt-5">
+    <div class="col-md-12">
+
+        <h2 id="title">Cart Items </h2>
+        <hr>
+        <table class="table table-bordered">
+            <tr>
+                <th style="width: 30px;">S.NO</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+            <% if(items && items.length > 0) { %>
+            <% 
+            let grandTotal = 0;
+            for(let i=0; i<items.length; i++) {
+                let product = items[i];
+                let images= product.images.split(',');
+                grandTotal = grandTotal + product.price;
+            %>
+                <tr>
+                    <td>
+                        <%= i + 1; %>
+                    </td>
+                    <td>
+                        <img src="/image/product/<%= images[0]; %>" style="height: 100px;width: 120px;" />
+                    </td>
+                    <td>
+                        <%= product.title; %>
+                    </td>
+                    <td>
+                        <%= product.price; %>
+                    </td>
+                    <td>
+                        <input type="number" value="1" min="1" max="10" data-price="<%= product.price; %>" id="quantity_<%= product.id; %>" onchange="calculateItemPrice('<%= product.id; %>');" />
+                    </td>
+                    <td>
+                        <span id="productPrice_<%= product.id; %>" class="product-total-price"><%= product.price * 1;  %></span>
+                    </td>
+                </tr>
+                <% } %>
+                <tfoot>
+                    <tr>
+                        <th colspan="5" class="text-end">Grand Total</th>
+                        <th colspan="2" id="grandTotal"><%= grandTotal; %></th>
+                    </tr>
+                    <tr>
+                        <th colspan="7" class="text text-end">
+                            <a href="/create-order" class="btn btn-primary">Proceed To Checkout</a>
+                        </th>
+                    </tr>
+                </tfoot>
+                <%  } else { %>
+                    <tr>
+                        <td colspan="7">No Items in the cart</td>
+                    </tr>
+                <% } %>
+        </table>
+    </div>
+</div>
+<script>
+    function calculateItemPrice(prodId){
+        console.log("function ::: calculateItemPrice : executed ::: prodId", prodId);
+        let productQuantity = $('#quantity_'+prodId).val();
+        let price = $('#quantity_'+prodId).attr('data-price');
+        console.log("productQuantity", productQuantity);
+        console.log("price", price);
+        let totalAmt = productQuantity * price;
+        console.log("totalAmt", totalAmt);
+        $('#productPrice_'+prodId).html(totalAmt);
+
+        let grandTotal = 0;
+        $('.product-total-price').each(function(){
+            let singleProductprice = parseInt($(this).html());
+            grandTotal = grandTotal + singleProductprice;
+        });
+        console.log("grandTotal", grandTotal);
+        $('#grandTotal').html(grandTotal);
+    }
+</script>

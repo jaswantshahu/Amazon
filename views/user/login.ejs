@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <form action="/authentication" method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Login Portal</h3>
+                        <% if(status && message) { %>
+                            <h3 class="text text-danger text-center"><%= message; %></h3>
+                        <% } %>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <label>Username</label>
+                            <input type="text" name="username" id="username" class="form-control" />
+                        </div>
+                        <div class="col-12">
+                            <label>Password</label>
+                            <input type="password" name="password" id="password" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="submit" value="Login" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
